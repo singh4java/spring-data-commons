@@ -15,8 +15,6 @@
  */
 package org.springframework.data.domain;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +35,6 @@ public class AbstractAggregateRoot {
 	/**
 	 * All domain events currently captured by the aggregate.
 	 */
-	@Getter(onMethod = @__(@DomainEvents)) //
 	private transient final List<Object> domainEvents = new ArrayList<>();
 
 	/**
@@ -61,5 +58,10 @@ public class AbstractAggregateRoot {
 	@AfterDomainEventPublication
 	public void clearDomainEvents() {
 		this.domainEvents.clear();
+	}
+
+	@DomainEvents
+	public List<Object> getDomainEvents() {
+		return this.domainEvents;
 	}
 }
